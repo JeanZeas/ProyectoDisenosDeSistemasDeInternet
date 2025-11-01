@@ -1,0 +1,101 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/GymFavicon.png' %}">
+    <title>Roles</title>
+</head>
+<body class="container mt-4">
+
+<nav class="navbar navbar-expand-lg navbar-primary bg-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand text-white" href=""><strong>Gimnasio Aquiles</strong></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+              data-bs-target="#navbarNav" aria-controls="navbarNav"
+              aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link text-white" href="{% url 'MainView' %}">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="{% url 'Products'%}">Productos</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="{% url 'Reports' %}">Reportes</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="{% url 'UsersListView' %}">Usuarios</a></li>
+        </ul>
+      </div>
+    </div>
+</nav>
+
+    <h1 class="mb-3">Lista de Roles</h1>
+
+    <div class="d-flex justify-content-end mb-3">
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addRoleModal">
+            Agregar Rol
+        </button>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="addRoleModal" tabindex="-1" aria-labelledby="addRoleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <form method="POST" action="{% url 'AgregarRole' %}">
+                {% csrf_token %}
+                <div class="modal-header">
+                <h5 class="modal-title" id="addRoleModalLabel">Agregar Rol</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                <div class="mb-3">
+                    <label for="roleName" class="form-label">Nombre del Rol</label>
+                    <input type="text" class="form-control" id="roleName" name="Name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="roleDescription" class="form-label">Descripción</label>
+                    <textarea class="form-control" id="roleDescription" name="Description" rows="3" required></textarea>
+                </div>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-success">Guardar</button>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+
+    
+
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Role</th>
+                <th>Descripción</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for r in roles %}
+            <tr>
+                <td>{{ r.Name }}</td>
+                <td>{{ r.Description }}</td>
+                <td>
+                    <a href="" class="btn btn-primary btn-sm">Modificar</a>
+                    <a href="" class="btn btn-danger btn-sm">Eliminar</a>
+                </td>
+                
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3" class="text-center">No hay roles registrados</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
