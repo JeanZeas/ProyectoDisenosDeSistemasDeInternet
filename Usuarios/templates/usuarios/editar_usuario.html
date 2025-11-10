@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Usuario | Gimnasio Aquiles</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/GymFavicon.png' %}">
+    <style>
+        body {
+            background-color: #f5f7fa;
+        }
+        .card {
+            border: none;
+            border-radius: 15px;
+        }
+        .card-header {
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+    </style>
+</head>
+<body class="container mt-5">
+
+<nav class="navbar navbar-expand-lg navbar-primary bg-primary rounded-3">
+    <div class="container-fluid">
+        <a class="navbar-brand text-white" href="#"><strong>Gimnasio Aquiles</strong></a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link text-white" href="{% url 'MainView' %}">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link text-white" href="{% url 'UsersListView' %}">Usuarios</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="card shadow-sm mt-4">
+    <div class="card-header bg-primary text-white">
+        <h4 class="mb-0 text-center">Editar Usuario</h4>
+    </div>
+    <div class="card-body">
+        <form method="POST">
+            {% csrf_token %}
+            
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label class="form-label">Nombre de usuario</label>
+                    <input type="text" name="Username" class="form-control" value="{{ usuario.Username }}" required>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Correo electrónico</label>
+                    <input type="email" name="Email" class="form-control" value="{{ usuario.EMail }}" required>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label class="form-label">Nombre</label>
+                    <input type="text" name="FirstName" class="form-control" value="{{ usuario.FirstName }}" required>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Apellido</label>
+                    <input type="text" name="LastName" class="form-control" value="{{ usuario.LastName }}" required>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label class="form-label">Teléfono</label>
+                    <input type="text" name="PhoneNumber" class="form-control" value="{{ usuario.PhoneNumber }}" required>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Rol</label>
+                    <select name="Role" class="form-select" required>
+                        {% for role in roles %}
+                            <option value="{{ role.id }}" {% if usuario.Role.id == role.id %}selected{% endif %}>{{ role.Name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Nueva contraseña (opcional)</label>
+                <input type="password" name="Password" class="form-control" placeholder="Deja en blanco si no deseas cambiarla">
+            </div>
+
+            <div class="d-flex justify-content-between mt-4">
+                <a href="{% url 'UsersListView' %}" class="btn btn-secondary">Cancelar</a>
+                <button type="submit" class="btn btn-success">Guardar Cambios</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

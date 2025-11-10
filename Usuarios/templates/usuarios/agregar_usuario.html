@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agregar Usuario</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+  <div class="container mt-5">
+    <div class="card shadow-lg">
+      <div class="card-header bg-primary text-white">
+        <h4 class="mb-0">Agregar Usuario</h4>
+      </div>
+      <div class="card-body">
+        <form method="POST" action="{% url 'CrearUsuarioView' %}">
+          {% csrf_token %}
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label for="Username" class="form-label">Nombre de usuario</label>
+              <input type="text" class="form-control" id="Username" name="Username" required>
+            </div>
+            <div class="col-md-6">
+              <label for="Password" class="form-label">Contraseña</label>
+              <input type="password" class="form-control" id="Password" name="Password" required>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label for="Email" class="form-label">Correo electrónico</label>
+              <input type="Email" class="form-control" id="Email" name="Email" required>
+            </div>
+            <div class="col-md-6">
+              <label for="PhoneNumber" class="form-label">Teléfono</label>
+              <input type="text" class="form-control" id="PhoneNumber" name="PhoneNumber" required>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label for="FirstName" class="form-label">Nombre</label>
+              <input type="text" class="form-control" id="FirstName" name="FirstName" required>
+            </div>
+            <div class="col-md-6">
+              <label for="LastName" class="form-label">Apellido</label>
+              <input type="text" class="form-control" id="LastName" name="LastName" required>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="Role" class="form-label">Rol</label>
+            <select class="form-select" id="Role" name="Role" required>
+              {% for r in roles %}
+                <option value="{{ r.id }}">{{ r.Name }}</option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <div class="d-flex justify-content-between">
+            <a href="{% url 'UsersListView' %}" class="btn btn-secondary">Cancelar</a>
+            <button type="submit" class="btn btn-primary">Guardar Usuario</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

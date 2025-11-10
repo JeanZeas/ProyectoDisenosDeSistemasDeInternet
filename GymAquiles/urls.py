@@ -22,5 +22,11 @@ urlpatterns = [
     path('',include('Usuarios.urls')),
     path('dashboard/',include('Dashboard.urls')),
     path('ventas/',include('Ventas.urls')),
+<<<<<<< HEAD
     path('',include('Membresias.urls'))
+=======
+    path('api/', include('Usuarios.api_urls'))
+    path('clientes',include('Clientes.urls')),
+
+>>>>>>> main
 ]
