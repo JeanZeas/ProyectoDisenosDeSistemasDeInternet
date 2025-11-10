@@ -1,43 +1,26 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from .models import Usuarios, Roles
+from .models import *
 
-# Login
+# Create your views here.
+
 def LoginView(request):
-    error = None
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        try:
-            user = Usuarios.objects.get(Username=username)
-            if user.check_password(password):
-                request.session['user_id'] = user.id
-                return redirect('MainView')  
-            else:
-                error = "Contraseña incorrecta"
-        except Usuarios.DoesNotExist:
-            error = "Usuario no encontrado"
-    return render(request, 'login.html', {'error': error})
+    return render(request, 'login.html')
 
-# Roles
+
 def RolesViews(request):
     roles = Roles.objects.all()
     return render(request, 'roles.html', {'roles': roles})
 
-# Agregar rol
 def AgregarRole(request):
     if request.method == 'POST':
         name = request.POST.get('Name')
         description = request.POST.get('Description')
         Roles.objects.create(Name=name, Description=description)
         return redirect('UsersView')
-    return render(request, 'roles/agregar_role.html')
+    return render(request, 'roles/agregar_role.html')  
 
-# Lista de usuarios
 def UsersListView(request):
-    user_id = request.session.get('user_id')
-    if not user_id:
-        return redirect('LoginView')
     usuarios = Usuarios.objects.all()
     return render(request,'users.html', {'usuarios': usuarios})
 
@@ -110,3 +93,4 @@ def EliminarUsuarioView(request, user_id):
     usuario = get_object_or_404(Usuarios, id=user_id)
     usuario.delete()
     return redirect('UsersListView')
+

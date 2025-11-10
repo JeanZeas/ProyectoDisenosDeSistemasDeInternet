@@ -1,0 +1,142 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/GymFavicon.png' %}">
+    <title>Clientes</title>
+    <style>
+        body {
+            background: #f0f4f8;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .navbar {
+            background: linear-gradient(90deg, #007bff, #6610f2);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .navbar-brand {
+            font-size: 1.6rem;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        h2 {
+            color: #555;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .table-container {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        table {
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        thead {
+            background: linear-gradient(90deg, #6610f2, #007bff);
+            color: #fff;
+        }
+
+        tbody tr:nth-child(even) {
+            background: #f6f6f6;
+        }
+
+        .btn-add {
+            background: #28a745;
+            color: #fff;
+            transition: 0.3s;
+        }
+
+        .btn-add:hover {
+            background: #218838;
+            color: #fff;
+        }
+    </style>
+</head>
+<body class="container mt-4">
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand text-white" href="#"><strong>Gimnasio Aquiles</strong></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+              data-bs-target="#navbarNav" aria-controls="navbarNav"
+              aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link text-white" href="{% url 'MainView' %}">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="{% url 'UsersView'%}">Roles</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="{% url 'Products'%}">Productos</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="{% url 'Reports' %}">Reportes</a></li>
+        </ul>
+      </div>
+    </div>
+</nav>
+
+<!-- Título -->
+<h1 class="my-4">Tabla de Clientes</h1>
+<h2>Gestión de información de clientes</h2>
+
+<!-- Tabla de Clientes -->
+<div class="table-container mt-4">
+    <div class="d-flex justify-content-end mb-3">
+        <button class="btn btn-add">Agregar Cliente</button>
+    </div>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Email</th>
+                <th>Teléfono</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Ejemplo de filas, puedes iterar con Django -->
+            <tr>
+                <td>1</td>
+                <td>Juan</td>
+                <td>Pérez</td>
+                <td>juan@mail.com</td>
+                <td>12345678</td>
+                <td>
+                    <button class="btn btn-sm btn-primary">Editar</button>
+                    <button class="btn btn-sm btn-danger">Eliminar</button>
+                </td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Ana</td>
+                <td>Gómez</td>
+                <td>ana@mail.com</td>
+                <td>87654321</td>
+                <td>
+                    <button class="btn btn-sm btn-primary">Editar</button>
+                    <button class="btn btn-sm btn-danger">Eliminar</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
