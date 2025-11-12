@@ -19,14 +19,12 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',include('Usuarios.urls')),
-    path('dashboard/',include('Dashboard.urls')),
-    path('ventas/',include('Ventas.urls')),
-<<<<<<< HEAD
-    path('',include('Membresias.urls'))
-=======
-    path('api/', include('Usuarios.api_urls'))
-    path('clientes',include('Clientes.urls')),
-
->>>>>>> main
+    path('', include('Usuarios.urls')),
+    path('dashboard/', include('Dashboard.urls')),
+    path('ventas/', include('Ventas.urls')),
+    # Agregado de la rama HEAD (leonardo)
+    path('', include('Membresias.urls')),
+    # Agregado de la rama main (Incoming Change)
+    path('api/', include('Usuarios.api_urls')),
+    path('clientes/', include('Clientes.urls'))
 ]
