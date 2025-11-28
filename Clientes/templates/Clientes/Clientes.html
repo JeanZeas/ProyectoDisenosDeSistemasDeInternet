@@ -106,6 +106,7 @@
                 <th>Apellido</th>
                 <th>Email</th>
                 <th>Teléfono</th>
+                <th>Estado</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -117,9 +118,18 @@
         <td>{{ cliente.apellido }}</td>
         <td>{{ cliente.email }}</td>
         <td>{{ cliente.telefono }}</td>
+        <td>{{ cliente.estado }}</td>
         <td>
-            <button class="btn btn-sm btn-primary">Editar</button>
-            <button class="btn btn-sm btn-danger">Eliminar</button>
+            <a href="{% url 'editar_cliente' cliente.id %}" 
+                class="btn btn-sm btn-primary">Editar
+            </a>
+
+            <a href="{% url 'eliminar_cliente' cliente.id %}" 
+                class="btn btn-sm btn-danger"
+                onclick="return confirm('¿Seguro que deseas eliminar este cliente?');">
+                Eliminar
+            </a>
+
         </td>
     </tr>
 {% empty %}
